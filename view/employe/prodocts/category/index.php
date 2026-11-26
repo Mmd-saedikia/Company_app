@@ -1,21 +1,21 @@
 <?php
-require_once "../../../functions/pdo.php";
-require_once "../../../functions/helpers.php";
-require_once "../layouts/header.php";
+require_once "../../../../functions/pdo.php";
+require_once "../../../../functions/helpers.php";
+require_once "../../layouts/header.php";
 $category = $conn->query("SELECT * FROM `category`")->fetchAll();
 ?>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
   <div class="layout-container">
     <!-- Menu -->
-        <?php require_once "../layouts/sidebar.php"; ?>
+        <?php require_once "../../layouts/sidebar.php"; ?>
     <!-- / Menu -->
 
     <!-- Layout container -->
     <!-- <div class="layout-page"> -->
     <!-- Navbar -->
 
-    <?php require_once "../layouts/navbar.php"; ?>
+    <?php require_once "../../layouts/navbar.php"; ?>
 
 
     <!-- / Navbar -->
@@ -70,4 +70,4 @@ $category = $conn->query("SELECT * FROM `category`")->fetchAll();
       <!-- / Content -->
 
       <!-- Footer -->
-      <?php require_once "../layouts/footer.php"; ?>
+      <?php require_once "../../layouts/footer.php"; ?>

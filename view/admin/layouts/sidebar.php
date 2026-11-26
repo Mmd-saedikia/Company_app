@@ -42,33 +42,60 @@
 
   <ul class="menu-inner py-1">
     <!-- Dashboards -->
-    <li class="menu-item active open">
+    <li class="menu-item open">
       <ul class="menu-sub">
-        <li class="menu-item active">
-          <a href="index.php" class="menu-link">
-            <div data-i18n="Analytics">داشبورد</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="dashboards-crm.php" class="menu-link">
-            <div data-i18n="CRM">مدیریت ارتباط با مشتری</div>
-          </a>
-        </li>
-        <li class="menu-item active">
-          <a href="list.php" class="menu-link">
-            <div data-i18n="eCommerce">لیست کارکنان</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="add-user.php" class="menu-link">
-            <div data-i18n="Logistics">اضافه کردن کارمند</div>
-          </a>
-        </li>
-        <li class="menu-item active">
-          <a href="../time/index.php" class="menu-link">
-            <div data-i18n="Analytics">ساعت ورودی و خروجی کامندان</div>
-          </a>
-        </li>
+        <?php if ($_SERVER["REQUEST_URI"] == "/company_app/view/admin/dashboard/") { ?>
+          <li class="menu-item active">
+            <a href="http://localhost/company_app/view/admin/dashboard/" class="menu-link">
+              <div data-i18n="Analytics">داشبورد</div>
+            </a>
+          </li>
+        <?php } else { ?>
+          <li class="menu-item">
+            <a href="http://localhost/company_app/view/admin/dashboard/" class="menu-link">
+              <div data-i18n="Analytics">داشبورد</div>
+            </a>
+          </li>
+        <?php } ?>
+        <?php if ($_SERVER["REQUEST_URI"] == "/company_app/view/admin/dashboard/list.php") { ?>
+          <li class="menu-item active">
+            <a href="http://localhost/company_app/view/admin/dashboard/list.php" class="menu-link">
+              <div data-i18n="eCommerce">لیست کارکنان</div>
+            </a>
+          </li>
+        <?php } else { ?>
+          <li class="menu-item">
+            <a href="http://localhost/company_app/view/admin/dashboard/list.php" class="menu-link">
+              <div data-i18n="eCommerce">لیست کارکنان</div>
+            </a>
+          </li>
+        <?php } ?>
+        <?php if ($_SERVER["REQUEST_URI"]=="/company_app/view/admin/dashboard/add-user.php") { ?>
+          <li class="menu-item active">
+            <a href="http://localhost/company_app/view/admin/dashboard/add-user.php" class="menu-link">
+              <div data-i18n="Logistics">اضافه کردن کارمند</div>
+            </a>
+          </li>
+        <?php } else { ?> 
+          <li class="menu-item">
+            <a href="http://localhost/company_app/view/admin/dashboard/add-user.php" class="menu-link">
+              <div data-i18n="Logistics">اضافه کردن کارمند</div>
+            </a>
+          </li>
+        <?php } ?>
+        <?php if ($_SERVER["REQUEST_URI"] == "/company_app/view/admin/time/") { ?>
+          <li class="menu-item active">
+            <a href="http://localhost/company_app/view/admin/time/" class="menu-link">
+              <div data-i18n="Analytics">ساعت ورودی و خروجی کامندان</div>
+            </a>
+          </li>
+        <?php } else { ?>
+          <li class="menu-item">
+            <a href="http://localhost/company_app/view/admin/time/" class="menu-link">
+              <div data-i18n="Analytics">ساعت ورودی و خروجی کامندان</div>
+            </a>
+          </li>
+        <?php } ?>
       </ul>
     </li>
   </ul>
