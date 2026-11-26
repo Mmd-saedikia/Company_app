@@ -1,6 +1,7 @@
 <?php
 define('URL', 'http://localhost/company_app/');
 require_once dirname(__DIR__, 3) . '/functions/helpers.php';
+session_start();
 ?>
 <!DOCTYPE html>
 

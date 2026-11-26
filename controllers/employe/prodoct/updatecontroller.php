@@ -1,6 +1,7 @@
 <?php
-require_once "../../functions/helpers.php";
-require_once "../../functions/pdo.php";
+session_start();
+require_once "../../../functions/helpers.php";
+require_once "../../../functions/pdo.php";
 
 if (isset($_GET["id"]) && $_GET["id"] > 0) {
     $id = (int) $_GET["id"];
@@ -18,17 +19,19 @@ if (checkMethod("POST")) {
     $category_id = $_POST["category_id"];
     $count = $_POST["count"];
     if ($name && $price && $category_id) {
-        if (strlen($name) > 2 && strlen($price) > 2) {
-                $query = "UPDATE `product` SET `name`= ? ,`price`=? ,`category_id`= ? , `count`= ? ,`updated_at`=now() WHERE id='$id'";
-                $stm = $conn->prepare($query);
-                $stm->execute([$name, $price, $category_id]);
-                    Redirct("view/employe/prodoct/");
+        if (strlen($name) > 2) {
+            $query = "UPDATE `product` SET `name`= ? ,`price`=? ,`category_id`= ? , `count`= ? ,`updated_at`=now() WHERE id='$id'";
+            $stm = $conn->prepare($query);
+            $stm->execute([$name, $price, $category_id]);
+            $_SESSION['success'] = "اطلاعات محصول با موفقیت به‌روزرسانی شد.";
+            Redirct("view/employe/prodoct/");
         } else {
-            echo "error3";
+            $_SESSION['error'] = "نام باید بیشتر از ۲ کاراکتر باشند.";
+            Redirct("view/employe/prodoct/update.php?id=" . $id);
         }
-
     } else {
-        echo "error4";
+        $_SESSION['error'] = "لطفاً همه فیلدها را پر کنید.";
+        Redirct("view/employe/prodoct/update.php?id=" . $id);
     }
 } else {
     echo "error5";

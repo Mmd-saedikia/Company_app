@@ -18,10 +18,23 @@ include_once "../layouts/navbar.php";
   <!-- Content -->
 
   <div class="container-xxl flex-grow-1 container-p-y">
-
+    <?php if (isset($_SESSION['success'])) { ?>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="ti ti-check me-1"></i>
+        <?= $_SESSION['success'] ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <?php } ?>
+    <?php if (isset($_SESSION['error'])) { ?>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="ti ti-alert-circle me-1"></i>
+        <?= $_SESSION['error'] ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <?php } ?>
     <!-- Bootstrap Table with Header - Dark -->
     <div class="card">
-      <h5 class="card-header">لیست کارمندان</h5>
+      <h5 class="card-header">لیست مشتری ها</h5>
       <div class="table-responsive text-nowrap">
         <table class="table">
           <thead class="table-dark">
@@ -55,7 +68,7 @@ include_once "../layouts/navbar.php";
                     </button>
                     <div class="dropdown-menu">
                       <a class="dropdown-item" href="<?= Url("view/employe/dashboard/update.php?id=") . $user['id'] ?>"><i class="ti ti-pencil me-1"></i> ویرایش</a>
-                      <a class="dropdown-item" href="<?= Url("controllers/employe/deleteController.php?id=") . $user['id'] ?> "><i class="ti ti-trash me-1"></i> حذف</a>
+                      <a class="dropdown-item delete-btn" href="" data-bs-toggle="modal" data-bs-target="#deleteModal" data-url="<?= Url("controllers/employe/deleteController.php?id=") . $user['id'] ?>"><i class="ti ti-trash me-1"></i> حذف</a>
                       <a class="dropdown-item" href="<?= Url("controllers/employe/status-users.php?id=") . $user['id'] ?> "><i class="ti ti-power me-1"></i> تغییر وضعیت</a>
                     </div>
                   </div>
@@ -70,7 +83,23 @@ include_once "../layouts/navbar.php";
   </div>
 </div>
 <!-- / Content -->
-
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">تأیید حذف</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        آیا مطمئن هستید که می‌خواهید این مشتری را حذف کنید؟
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">نه</button>
+        <a href="#" id="confirmDelete" class="btn btn-danger">بله، حذف کن</a>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Footer -->
 <footer class="content-footer footer bg-footer-theme">
   <div class="container-xxl">

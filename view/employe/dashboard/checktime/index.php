@@ -2,14 +2,27 @@
 include_once "../../layouts/header.php";
 include_once "../../layouts/sidebar.php";
 include_once "../../layouts/navbar.php";
-?>
+        ?>
 <!-- / Menu -->
 <!-- Content wrapper -->
 <div class="content-wrapper">
     <!-- Content -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
-
+        <?php if (isset($_SESSION['success'])) { ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="ti ti-check me-1"></i>
+                <?= $_SESSION['success'] ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php } ?>
+        <?php if (isset($_SESSION['error'])) { ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="ti ti-alert-circle me-1"></i>
+                <?= $_SESSION['error'] ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php } ?>
         <!-- Bootstrap Table with Header - Dark -->
         <div class="row">
             <form class="browser-default-validation" method="post" action="<?= Url("controllers/employe/checktime.php") ?>">

@@ -10,28 +10,25 @@ if (checkMethod("POST")) {
     $employee = $_SESSION["employe_id"];
     if ($firstname && $lastname && $phone && $employee) {
         if (strlen($firstname) > 2 && strlen($lastname) > 2) {
-                    if ($_FILES["profile"]["tmp_name"]) {
-                        $query = "INSERT INTO `users`(`firstname`, `lastname`, `phone` , `employe_id`) VALUES (? , ? , ? , ?)";
-                        $stm = $conn->prepare($query);
-                        $stm->execute([$firstname, $lastname, $phone, $employee]);
-                    } else {
-                        $query = "INSERT INTO `users`(`firstname`, `lastname`, `phone` , `employe_id`) VALUES (? , ? , ? , ?)";
-                        $stm = $conn->prepare($query);
-                        $stm->execute([$firstname, $lastname, $phone , $employee]);
-
-                    }
-                    header("Location: http://localhost/company_app/view/employe/dashboard/add-user.php");
-
+            if ($_FILES["profile"]["tmp_name"]) {
+                $query = "INSERT INTO `users`(`firstname`, `lastname`, `phone` , `employe_id`) VALUES (? , ? , ? , ?)";
+                $stm = $conn->prepare($query);
+                $stm->execute([$firstname, $lastname, $phone, $employee]);
+            } else {
+                $query = "INSERT INTO `users`(`firstname`, `lastname`, `phone` , `employe_id`) VALUES (? , ? , ? , ?)";
+                $stm = $conn->prepare($query);
+                $stm->execute([$firstname, $lastname, $phone , $employee]);
+            }
+            $_SESSION['success'] = "مشتری با موفقیت ثبت شد.";
+            header("Location: http://localhost/company_app/view/employe/dashboard/add-user.php");
         } else {
-            echo "error3";
+            $_SESSION['error'] = "نام و نام خانوادگی باید بیشتر از ۲ کاراکتر باشند.";
+            header("Location: http://localhost/company_app/view/employe/dashboard/add-user.php");
         }
-
     } else {
-        echo "error4";
+        $_SESSION['error'] = "لطفاً همه فیلدها را پر کنید.";
+        header("Location: http://localhost/company_app/view/employe/dashboard/add-user.php");
     }
 } else {
     echo "error5";
 }
-
-
-

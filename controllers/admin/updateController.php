@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "../../functions/helpers.php";
 require_once "../../functions/pdo.php";
 
@@ -13,19 +14,22 @@ if (isset($_GET["id"]) && $_GET["id"] > 0) {
     exit;
 }
 if (checkMethod("POST")) {
-    $firstname = $_POST["firstname"];
-    if ($firstname) {
-        if (strlen($firstname) > 2 && strlen($lastname) > 2) {
-                $query = "UPDATE `employees` SET `firstname`= ?,`updated_at`=now() WHERE id='$id'";
-                $stm = $conn->prepare($query);
-                $stm->execute([$firstname]);
-                    Redirct("view/admin/dashboard/list.php");
-        } else {
-            echo "error3";
-        }
+    $username = $_POST["username"];
 
+    if ($username) {
+        if (strlen($username) > 4) {
+            $query = "UPDATE `employees` SET `username`= ?, `updated_at`=now() WHERE id='$id'";
+            $stm = $conn->prepare($query);
+            $stm->execute([$username]);
+            $_SESSION['success'] = "اطلاعات کارمند با موفقیت به‌روزرسانی شد.";
+            Redirct("view/admin/dashboard/list.php");
+        } else {
+            $_SESSION['error'] = "کاراکتر ها باید بیشتر از 4 حرف باشد";
+            Redirct("view/admin/dashboard/list.php");
+        }
     } else {
-        echo "error4";
+        $_SESSION['error'] = "لطفاً همه فیلدها را پر کنید.";
+        Redirct("view/admin/dashboard/list.php");
     }
 } else {
     echo "error5";

@@ -1717,13 +1717,25 @@ $user = $conn->query("SELECT * FROM `employees` WHERE id=$id")->fetch();
           <!-- Content -->
 
           <div class="container-xxl flex-grow-1 container-p-y">
-            <h4 class="py-3 mb-4"><span class="text-muted fw-light">فرم ها/</span> اینپوت های پایه</h4>
-
+            <?php if (isset($_SESSION['success'])) { ?>
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="ti ti-check me-1"></i>
+                <?= $_SESSION['success'] ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <?php } ?>
+            <?php if (isset($_SESSION['error'])) { ?>
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="ti ti-alert-circle me-1"></i>
+                <?= $_SESSION['error'] ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <?php } ?>
             <div class="row">
-              <form action="<?= Url("controllers/admin/updateController.php?id=").$user['id'] ?>" method="post">
+              <form action="<?= Url("controllers/admin/updateController.php?id=") . $user['id'] ?>" method="post">
                 <div class="col-md-6">
                   <div class="card mb-4">
-                    <h5 class="card-header">پیش فرض</h5>
+                    <h5 class="card-header">ویرایش</h5>
                     <div class="card-body">
                       <div>
                         <label for="defaultFormControlInput" class="form-label">نام</label>

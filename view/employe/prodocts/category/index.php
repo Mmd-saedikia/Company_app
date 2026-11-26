@@ -8,7 +8,7 @@ $category = $conn->query("SELECT * FROM `category`")->fetchAll();
 <div class="layout-wrapper layout-content-navbar">
   <div class="layout-container">
     <!-- Menu -->
-        <?php require_once "../../layouts/sidebar.php"; ?>
+    <?php require_once "../../layouts/sidebar.php"; ?>
     <!-- / Menu -->
 
     <!-- Layout container -->
@@ -25,10 +25,23 @@ $category = $conn->query("SELECT * FROM `category`")->fetchAll();
       <!-- Content -->
 
       <div class="container-xxl flex-grow-1 container-p-y">
-
+        <?php if (isset($_SESSION['success'])) { ?>
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="ti ti-check me-1"></i>
+            <?= $_SESSION['success'] ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <?php } ?>
+        <?php if (isset($_SESSION['error'])) { ?>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="ti ti-alert-circle me-1"></i>
+            <?= $_SESSION['error'] ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <?php } ?>
         <!-- Bootstrap Table with Header - Dark -->
         <div class="card">
-          <h5 class="card-header">لیست ورود و خروجی کارمندان</h5>
+          <h5 class="card-header">لیست دسته بندی ها</h5>
           <div class="table-responsive text-nowrap">
             <table class="table">
               <thead class="table-dark">

@@ -18,7 +18,20 @@ include_once "../layouts/navbar.php";
   <!-- Content -->
 
   <div class="container-xxl flex-grow-1 container-p-y">
-
+    <?php if (isset($_SESSION['success'])) { ?>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="ti ti-check me-1"></i>
+        <?= $_SESSION['success'] ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <?php } ?>
+    <?php if (isset($_SESSION['error'])) { ?>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="ti ti-alert-circle me-1"></i>
+        <?= $_SESSION['error'] ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <?php } ?>
     <!-- Bootstrap Table with Header - Dark -->
     <div class="row">
       <form action="<?= Url("controllers/employe/updateController.php?id=") . $user['id'] ?>" method="post">
